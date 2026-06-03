@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, useMemo } from 'react';
 import { OrderContext } from '../context/OrderContext';
 import { ProductContext } from '../context/ProductContext';
 import { CustomerContext } from '../context/CustomerContext';
-import { Plus, Trash2, Download, Filter } from 'lucide-react';
+import { Plus, Trash2, Download, Filter, ShoppingCart } from 'lucide-react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { downloadCSV } from '../utils/csv';
 
@@ -133,9 +133,18 @@ const Orders = () => {
                   <th className="px-6 py-4 font-medium text-gray-500 dark:text-gray-400 text-sm uppercase tracking-wider text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-dark-700">
+              <tbody className="divide-y divide-slate-100 dark:divide-dark-700">
                 {filteredOrders.length === 0 ? (
-                  <tr><td colSpan="6" className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">No orders found.</td></tr>
+                  <tr>
+                    <td colSpan="6" className="px-6 py-12 text-center text-slate-500 dark:text-slate-400">
+                      <div className="flex flex-col items-center justify-center space-y-3 py-4">
+                        <div className="p-3 bg-slate-50 dark:bg-dark-900 rounded-2xl text-slate-400 dark:text-slate-500">
+                          <ShoppingCart size={32} />
+                        </div>
+                        <span className="font-medium text-slate-400 dark:text-slate-500">No orders found</span>
+                      </div>
+                    </td>
+                  </tr>
                 ) : (
                   filteredOrders.map(order => {
                     const customer = customers.find(c => c.id === order.customer_id);
